@@ -61,7 +61,12 @@ ext {
   assertJVersion = '3.6.1'
 
   // Libraries
-  nettyVersion = '4.1.39.Final'
+  if (!project.hasProperty("nettyVersion")) {
+	nettyVersion = '4.1.39.Final'
+  }
+  else {
+	println "Netty version defined from command line: ${nettyVersion}"
+  }
   jacksonDatabindVersion = '2.5.1'
 
   // Testing
@@ -203,6 +208,7 @@ configure(rootProject) { project ->
 		println 'Bamboo CI detected, avoiding use of mavenLocal()'
 	  }
 	  maven { url 'https://repo.spring.io/libs-snapshot' }
+	  maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	maven { url 'https://repo.spring.io/libs-milestone' }
 	maven { url 'https://repo.spring.io/libs-release' }
