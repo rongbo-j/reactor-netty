@@ -7,10 +7,18 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
         transport: [native, nio]
         netty: ["", "-PnettyVersion=4.1.42.Final", "-PnettyVersion=4.1.43.Final-SNAPSHOT"]
+        exclude:
+          # excludes native on Windows (there's none)
+          - os: windows-latest
+            transport: native
+          # excludes snapshot on macOS, see https://github.com/netty/netty/issues/8100
+          - os: macOS-latest
+            netty: "-PnettyVersion=4.1.43.Final-SNAPSHOT"
 
     steps:
     - uses: actions/checkout@v1
