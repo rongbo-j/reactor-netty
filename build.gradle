@@ -60,13 +60,27 @@ ext {
   testAddonVersion = reactorCoreVersion
   assertJVersion = '3.6.1'
 
-  // Libraries
-  if (!project.hasProperty("nettyVersion")) {
-	nettyVersion = '4.1.39.Final'
+  // Netty
+  nettyDefaultVersion = '4.1.39.Final'
+  nettyLatestRelease = '4.1.42.Final'
+  nettyLatestSnapshot = '4.1.43.Final-SNAPSHOT'
+  if (!project.hasProperty("nettyType")) {
+	nettyVersion = nettyDefaultVersion
   }
   else {
-	println "Netty version defined from command line: ${nettyVersion}"
+	if (nettyType == 'snapshot') {
+	  nettyVersion = nettyLatestSnapshot
+	}
+	else if (nettyType == 'release') {
+	  nettyVersion = nettyLatestRelease
+	}
+	else {
+	  nettyVersion = nettyDefaultVersion
+	}
+	println "Netty version defined from command line (${nettyType}): ${nettyVersion}"
   }
+
+  // Libraries
   jacksonDatabindVersion = '2.5.1'
 
   // Testing
