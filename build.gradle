@@ -74,8 +74,11 @@ ext {
 	else if (nettyType == 'latest') {
 	  nettyVersion = nettyLatestRelease
 	}
-	else {
+	else if (nettyType == 'default') {
 	  nettyVersion = nettyDefaultVersion
+	}
+	else {
+	  nettyVersion = nettyType
 	}
 	println "Netty version defined from command line (${nettyType}): ${nettyVersion}"
   }
