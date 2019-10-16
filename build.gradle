@@ -71,7 +71,7 @@ ext {
 	if (nettyType == 'snapshot') {
 	  nettyVersion = nettyLatestSnapshot
 	}
-	else if (nettyType == 'release') {
+	else if (nettyType == 'latest') {
 	  nettyVersion = nettyLatestRelease
 	}
 	else {
